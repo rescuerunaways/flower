@@ -7,7 +7,7 @@ import org.junit.Test;
 import static com.flower.pack.io.Parser.parse;
 import static org.junit.Assert.assertEquals;
 
-public class TestParse {
+public class ParseTest {
     @Test()
     public void testParse() throws CodeException {
         Pair<String, Integer> result = new Pair<>("R12", 10);
