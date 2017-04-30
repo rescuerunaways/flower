@@ -2,10 +2,11 @@ package com.flower.pack.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Pack {
 
-    public static List<Integer> pack(int order, int[] bckts) {
+    public static List<Integer> pack(Integer order, List<Integer> bckts) {
         final int[] bcktCache = new int[order + 1];
         final int[] minBcktCache = new int[order + 1];
 
@@ -31,14 +32,7 @@ public class Pack {
         return result;
     }
 
-    private static int[] getSmallerBckts(int[] bckts, int i) {
-        int[] smaller = new int[bckts.length];
-
-        for (int k = 0; k <= bckts.length - 1; k++) {
-            if (bckts[k] <= i) {
-                smaller[k] = bckts[k];
-            }
-        }
-        return smaller;
+    private static List<Integer> getSmallerBckts(List<Integer> bckts, int i) {
+        return bckts.stream().filter(b -> b <= i).collect(Collectors.toList());
     }
 }
