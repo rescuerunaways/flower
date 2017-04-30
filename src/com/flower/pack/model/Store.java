@@ -1,13 +1,16 @@
 package com.flower.pack.model;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Store {
     public static final Map<String, List<Bucket>> flowers = createMap();
 
-    public static int[] getBuckets(String code) {
-
-        return null;
+    public static List<Integer> getBuckets(String code) {
+        return flowers.get(code).stream().map(Bucket::getNumber).collect(Collectors.toList());
     }
 
     private static Map<String, List<Bucket>> createMap() {
