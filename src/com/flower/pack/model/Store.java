@@ -1,14 +1,11 @@
 package com.flower.pack.model;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Store {
-    public static final Map<Flower, List<Bucket>> flowers = createMap();
+    public static final Map<String, List<Bucket>> flowers = createMap();
 
-    private static Map<Flower, List<Bucket>> createMap() {
+    private static Map<String, List<Bucket>> createMap() {
 
         Flower roses = new Flower("Roses", "R12");
         Flower tulips = new Flower("Tulips", "T58");
@@ -28,10 +25,10 @@ public class Store {
         l.add(new Bucket(5, 9.95f));
         l.add(new Bucket(9, 16.99f));
 
-        Map<Flower, List<Bucket>> m = new HashMap<>();
-        m.put(roses, r);
-        m.put(tulips, t);
-        m.put(lilies, l);
+        Map<String, List<Bucket>> m = new HashMap<>();
+        m.put(roses.getCode(), r);
+        m.put(tulips.getCode(), t);
+        m.put(lilies.getCode(), l);
 
         return m;
     }

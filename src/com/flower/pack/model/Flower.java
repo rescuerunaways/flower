@@ -14,7 +14,6 @@ public class Flower {
         return name;
     }
 
-
     public String getCode() {
         return code;
     }
