@@ -5,6 +5,11 @@ import java.util.*;
 public class Store {
     public static final Map<String, List<Bucket>> flowers = createMap();
 
+    public static int[] getBuckets(String code) {
+
+        return null;
+    }
+
     private static Map<String, List<Bucket>> createMap() {
 
         Flower roses = new Flower("Roses", "R12");
