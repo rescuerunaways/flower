@@ -1,25 +1,14 @@
-package com.flower.pack;
+package com.flower.pack.service;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.flower.pack.Cache.bcktCache;
-import static com.flower.pack.Cache.minBcktCache;
-
 public class Pack {
 
-    public List<Integer> pack(int order, int[] bckts) {
-        updateCache(order, bckts);
-        List<Integer> result = new ArrayList<>(order);
-        while (order > 0) {
-            int thisBckt = bcktCache[order];
-            result.add(thisBckt);
-            order = order - thisBckt;
-        }
-        return result;
-    }
+    public static List<Integer> pack(int order, int[] bckts) {
+        final int[] bcktCache = new int[order + 1];
+        final int[] minBcktCache = new int[order + 1];
 
-    private void updateCache(int order, int[] bckts) {
         for (int i = 0; i <= order; i++) {
             int bcktCount = i;
             int newBckt = 1;
@@ -33,9 +22,16 @@ public class Pack {
             minBcktCache[i] = bcktCount;
             bcktCache[i] = newBckt;
         }
+        List<Integer> result = new ArrayList<>(order);
+        while (order > 0) {
+            int thisBckt = bcktCache[order];
+            result.add(thisBckt);
+            order = order - thisBckt;
+        }
+        return result;
     }
 
-    private int[] getSmallerBckts(int[] bckts, int i) {
+    private static int[] getSmallerBckts(int[] bckts, int i) {
         int[] smaller = new int[bckts.length];
 
         for (int k = 0; k <= bckts.length - 1; k++) {
