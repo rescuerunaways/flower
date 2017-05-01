@@ -6,7 +6,6 @@ import com.flower.pack.model.Order;
 import static com.flower.pack.io.Validator.validateCode;
 
 public class Parser {
-
     public static Order parse(String s) throws CodeException {
 
         String[] strings = s.split("\\s");
@@ -16,6 +15,5 @@ public class Parser {
         validateCode(code);
 
         return new Order(order, code);
-
     }
 }
