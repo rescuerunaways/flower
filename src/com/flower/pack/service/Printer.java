@@ -11,13 +11,13 @@ import static java.util.stream.Collectors.toList;
 
 public class Printer {
 
-    public static String output(Order o, List<Integer> p) {
+    public static String print(Order o, List<Integer> p) {
         StringBuilder rslt = new StringBuilder();
 
         rslt.append(o.toString())
             .append("  ")
             .append("$")
-            .append(sum(o, p).get().toString())
+            .append(sum(o, p))
             .append("\n");
 
         for (List<Integer> i : groupPacksSameNumber(p)) {
@@ -27,7 +27,7 @@ public class Printer {
                 .append(i.get(0))
                 .append("  ")
                 .append("$")
-                .append(sum(o, i).get().toString())
+                .append(sum(o, i))
                 .append("\n");
         }
 
