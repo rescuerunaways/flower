@@ -22,14 +22,14 @@ public class Store {
         r.put(10, 12.99f);
 
         Map<Integer, Float> t = new HashMap<>(3);
-        r.put(3, 9.95f);
-        r.put(6, 16.95f);
-        r.put(9, 24.95f);
+        t.put(3, 9.95f);
+        t.put(6, 16.95f);
+        t.put(9, 24.95f);
 
         Map<Integer, Float> l = new HashMap<>(3);
-        r.put(3, 5.95f);
-        r.put(5, 9.95f);
-        r.put(9, 16.99f);
+        l.put(3, 5.95f);
+        l.put(5, 9.95f);
+        l.put(9, 16.99f);
 
         Map<String, Map<Integer,Float>> m = new HashMap<>(3);
         m.put(roses.getCode(), r);
