@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import java.math.BigDecimal;
 
+import static com.flower.pack.service.Calculator.sum;
 import static org.junit.Assert.assertEquals;
 
 
@@ -15,8 +16,8 @@ public class CalculatorTest {
     @Test()
     public void testSum() throws PackException {
         Order o = new Order(20, "R12");
-        BigDecimal result = Calculator.sum(o, Pack.pack(o, Store.getBuckets("R12")));
-        assertEquals(new BigDecimal(25.98), result);
+        BigDecimal result = sum(o, Pack.pack(o, Store.getBuckets("R12")));
+        assertEquals(BigDecimal.valueOf(25.98), result);
     }
 }
 
