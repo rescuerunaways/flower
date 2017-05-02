@@ -25,4 +25,5 @@ public class PackTest {
         Order o = new Order(7, "R12");
         pack(o, new HashSet<>(Arrays.asList(2, 4)));
     }
+
 }

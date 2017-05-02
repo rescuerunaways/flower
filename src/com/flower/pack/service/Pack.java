@@ -4,39 +4,48 @@ import com.flower.pack.excptions.PackException;
 import com.flower.pack.model.Order;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Pack {
-
     public static List<Integer> pack(Order order, Set<Integer> bckts) throws PackException {
         Integer num = order.getNumber();
         final int[] bcktCache = new int[num + 1];
-        final int[] minBcktCache = new int[num + 1];
+        updateCache(bcktCache, order.getNumber(), bckts);
+        return pack(order, bcktCache);
+
+    }
+
+    public static void updateCache(int[] bcktCache, Integer num, Set<Integer> bckts) throws PackException {
+        final int[] minBckt = new int[num + 1];
 
         for (int i = 0; i <= num; i++) {
             int bcktCount = i;
-
             int newBckt = 0;
             for (int j : getSmallerBckts(bckts, i)) {
-                if (minBcktCache[i - j] + 1 < bcktCount) {
-                    bcktCount = minBcktCache[i - j] + 1;
+                if (minBckt[i - j] + 1 < bcktCount) {
+                    bcktCount = minBckt[i - j] + 1;
                     newBckt = j;
+                    if (newBckt == 0) {
+                        bcktCount = 0;
+                    }
                 }
             }
-            minBcktCache[i] = bcktCount;
+            minBckt[i] = bcktCount;
             bcktCache[i] = newBckt;
         }
-        List<Integer> result = new ArrayList<>(num);
+    }
 
-        if(!checkBucket(num, bcktCache)) {
-            throw new PackException(order);
-        }
+    private static List<Integer> pack(Order o, int[] bcktCache) throws PackException {
+        Integer num = o.getNumber();
+        List<Integer> result = new ArrayList<>(num);
 
         while (num > 0) {
             int thisBckt = bcktCache[num];
+            if (thisBckt == 0) {
+                throw new PackException(o, sumResult(result));
+            }
             result.add(thisBckt);
             num = num - thisBckt;
         }
@@ -48,7 +57,7 @@ public class Pack {
         return bckts.stream().filter(b -> b <= i).collect(Collectors.toList());
     }
 
-    private static boolean checkBucket(Integer order, int[] bckCache) {
-        return order.equals(Arrays.stream(bckCache).reduce(0, Integer::sum));
+    private static Integer sumResult(List<Integer> result) {
+        return result.stream().reduce(0, Integer::sum);
     }
 }
