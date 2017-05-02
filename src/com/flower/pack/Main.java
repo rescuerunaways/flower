@@ -14,16 +14,24 @@ import static com.flower.pack.service.Pack.pack;
 import static com.flower.pack.service.Printer.print;
 
 public class Main {
-    public static final void main(String[] args) throws CodeException {
+    public static final String inputPath = "./order/raw/order.txt";
+
+    public static void main(String[] args) throws CodeException {
+        System.out.print(result(inputPath));
+    }
+
+    public static String result(String i) {
+        StringBuilder rslt = new StringBuilder();
         try {
-            for (String s : getOrders()) {
+            for (String s : getOrders(i)) {
                 Order order = parse(s);
                 List<Integer> pack = pack(order.getNumber(), getBuckets(order.getCode()));
-                System.out.print(print(order, pack));
+                rslt.append(print(order, pack));
             }
+            return rslt.toString();
 
         } catch (CodeException | IOException e) {
-            System.out.print(e.getMessage());
+            return e.getMessage();
         }
     }
 }

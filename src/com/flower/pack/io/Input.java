@@ -7,8 +7,9 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
 
+
 public class Input {
-    public static List<String> getOrders() throws IOException {
-        return Files.lines(Paths.get("./order/raw/order.txt")).collect(Collectors.toList());
+    public static List<String> getOrders(String i) throws IOException {
+        return Files.lines(Paths.get(i)).collect(Collectors.toList());
     }
 }
