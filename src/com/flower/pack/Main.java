@@ -4,7 +4,6 @@ package com.flower.pack;
 import com.flower.pack.excptions.CodeException;
 import com.flower.pack.model.Order;
 
-import java.io.IOException;
 import java.util.List;
 
 import static com.flower.pack.io.Input.getOrders;
@@ -25,13 +24,13 @@ public class Main {
         try {
             for (String s : getOrders(i)) {
                 Order order = parse(s);
-                List<Integer> pack = pack(order.getNumber(), getBuckets(order.getCode()));
+                List<Integer> pack = pack(order, getBuckets(order.getCode()));
                 rslt.append(print(order, pack));
             }
             return rslt.toString();
 
-        } catch (CodeException | IOException e) {
-            return e.getMessage();
+        } catch (Exception e) {
+            return "Exception: " + e.getMessage();
         }
     }
 }
